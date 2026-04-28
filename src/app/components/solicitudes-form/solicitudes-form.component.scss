@@ -1,0 +1,125 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.link-btn {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+ 
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Formularios */
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.half {
+  flex: 1;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+ 
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+ 
+  &.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Botón de Enviar */
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+ 
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+ 
+  &:not(:disabled):hover {
+    background-color: #0056b3;
+  }
+}
+
+/* Alertas y Demo */
+.demo-box {
+  background: #fff3cd;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #ffeeba;
+  color: #856404;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.success { background-color: #d4edda; color: #155724; }
+.error { background-color: #f8d7da; color: #721c24; }
+
+.btn-retry {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}

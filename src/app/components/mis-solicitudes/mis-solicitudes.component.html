@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="header-actions">
+    <h2>Mis Solicitudes</h2>
+    <a routerLink="/solicitudes/nueva" class="link-btn">+ Crear Nueva Solicitud</a>
+  </div>
+
+  <div class="table-responsive">
+    <table *ngIf="solicitudes.length > 0; else noData">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Título</th>
+          <th>Categoría</th>
+          <th>Prioridad</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sol of solicitudes">
+          <td>{{ sol.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td><strong>{{ sol.titulo }}</strong></td>
+          <td><span class="badge">{{ sol.categoria }}</span></td>
+          <td class="text-center">{{ sol.prioridad }}</td>
+          <td>{{ sol.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <div class="empty-state">
+      <p>Aún no has creado ninguna solicitud.</p>
+    </div>
+  </ng-template>
+</div>

@@ -1,0 +1,72 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.link-btn {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+ 
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Tabla */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+ 
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+ 
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+}
+
+/* Etiquetas y utilidades */
+.badge {
+  background: #e9ecef;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #495057;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #6c757d;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 20px;
+}

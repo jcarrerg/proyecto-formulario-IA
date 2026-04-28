@@ -1,0 +1,141 @@
+<div class="container">
+  <header class="header-actions">
+    <h1 id="page-title">Nueva Solicitud</h1>
+    <a routerLink="/mis-solicitudes"
+       class="link-btn"
+       aria-label="Ir a la página de mis solicitudes">
+      Ver mis solicitudes
+    </a>
+  </header>
+
+  <!-- Mensaje de éxito accesible -->
+  <div *ngIf="exito"
+       class="alert success"
+       role="status"
+       aria-live="polite">
+    ✅ ¡Solicitud guardada con éxito! Redirigiendo al listado...
+  </div>
+
+  <!-- Mensaje de error accesible -->
+  <div *ngIf="mensajeError"
+       class="alert error"
+       role="alert"
+       aria-live="assertive">
+    <p>
+      <strong>❌ Vaya, algo ha fallado.</strong>
+      No se ha podido conectar con la base de datos o faltan permisos.
+    </p>
+    <button type="button"
+            class="btn-retry"
+            (click)="onSubmit()">
+      Reintentar envío
+    </button>
+  </div>
+
+  <form [formGroup]="miFormulario"
+        (ngSubmit)="onSubmit()"
+        aria-labelledby="page-title"
+        novalidate>
+
+    <!-- TÍTULO -->
+    <div class="form-group">
+      <label for="titulo">Título <span aria-hidden="true">*</span></label>
+      <input id="titulo"
+             type="text"
+             formControlName="titulo"
+             placeholder="Ej. Error en login"
+             required
+             aria-required="true"
+             [attr.aria-invalid]="miFormulario.get('titulo')?.invalid && miFormulario.get('titulo')?.touched"
+             aria-describedby="titulo-error">
+
+      <small id="titulo-error"
+             class="error-text"
+             *ngIf="miFormulario.get('titulo')?.touched && miFormulario.get('titulo')?.invalid">
+        El título es obligatorio (entre 5 y 60 caracteres).
+      </small>
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="form-group">
+      <label for="descripcion">Descripción <span aria-hidden="true">*</span></label>
+      <textarea id="descripcion"
+                formControlName="descripcion"
+                rows="4"
+                placeholder="Detalla el problema..."
+                required
+                aria-required="true"
+                [attr.aria-invalid]="miFormulario.get('descripcion')?.invalid && miFormulario.get('descripcion')?.touched"
+                aria-describedby="descripcion-error"></textarea>
+
+      <small id="descripcion-error"
+             class="error-text"
+             *ngIf="miFormulario.get('descripcion')?.touched && miFormulario.get('descripcion')?.invalid">
+        La descripción debe tener entre 20 y 500 caracteres.
+      </small>
+    </div>
+
+    <div class="form-row">
+
+      <!-- CATEGORÍA -->
+      <div class="form-group half">
+        <label for="categoria">Categoría <span aria-hidden="true">*</span></label>
+        <select id="categoria"
+                formControlName="categoria"
+                required
+                aria-required="true"
+                [attr.aria-invalid]="miFormulario.get('categoria')?.invalid && miFormulario.get('categoria')?.touched">
+          <option value="">Selecciona una opción</option>
+          <option value="Soporte Técnico">Soporte Técnico</option>
+          <option value="Desarrollo">Desarrollo</option>
+          <option value="Facturación">Facturación</option>
+        </select>
+      </div>
+
+      <!-- PRIORIDAD -->
+      <div class="form-group half">
+        <label for="prioridad">
+          Prioridad (1 baja - 5 alta)
+          <span aria-hidden="true">*</span>
+        </label>
+        <input id="prioridad"
+               type="number"
+               formControlName="prioridad"
+               min="1"
+               max="5"
+               required
+               aria-required="true"
+               [attr.aria-invalid]="miFormulario.get('prioridad')?.invalid && miFormulario.get('prioridad')?.touched">
+      </div>
+
+    </div>
+
+    <!-- EMAIL -->
+    <div class="form-group">
+      <label for="email">Email de contacto <span aria-hidden="true">*</span></label>
+      <input id="email"
+             type="email"
+             formControlName="email"
+             placeholder="tu@email.com"
+             required
+             aria-required="true"
+             [attr.aria-invalid]="miFormulario.get('email')?.invalid && miFormulario.get('email')?.touched"
+             aria-describedby="email-error">
+
+      <small id="email-error"
+             class="error-text"
+             *ngIf="miFormulario.get('email')?.touched && miFormulario.get('email')?.invalid">
+        Introduce un correo electrónico válido.
+      </small>
+    </div>
+
+    <!-- BOTÓN -->
+    <button type="submit"
+            class="btn-submit"
+            [disabled]="miFormulario.invalid || enviando"
+            [attr.aria-busy]="enviando">
+      {{ enviando ? 'Enviando...' : 'Enviar Solicitud' }}
+    </button>
+
+  </form>
+</div>
