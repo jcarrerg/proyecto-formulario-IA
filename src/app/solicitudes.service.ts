@@ -6,10 +6,9 @@ import { Formulario } from './interface-formulario/formulario.interface';
 import { environment } from '../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SolicitudesService {
-
   private readonly supabase: SupabaseClient;
 
   // Estado interno controlado
@@ -20,7 +19,7 @@ export class SolicitudesService {
   constructor() {
     this.supabase = createClient(
       environment.supabaseUrl,
-      environment.supabaseKey
+      environment.supabaseKey,
     );
 
     this.cargarSolicitudes().subscribe();
@@ -34,19 +33,19 @@ export class SolicitudesService {
       this.supabase
         .from('solicitudes')
         .select('*')
-        .order('created_at', { ascending: false })
+        .order('created_at', { ascending: false }),
     ).pipe(
-      map(response => {
+      map((response) => {
         if (response.error) {
           throw response.error;
         }
         return response.data as Formulario[];
       }),
-      tap(data => this.solicitudesSubject.next(data)),
-      catchError(error => {
+      tap((data) => this.solicitudesSubject.next(data)),
+      catchError((error) => {
         console.error('Error al cargar solicitudes:', error);
         return throwError(() => error);
-      })
+      }),
     );
   }
 
@@ -55,26 +54,22 @@ export class SolicitudesService {
    */
   insertarSolicitud(solicitud: Formulario): Observable<Formulario> {
     return from(
-      this.supabase
-        .from('solicitudes')
-        .insert([solicitud])
-        .select()
-        .single()
+      this.supabase.from('solicitudes').insert([solicitud]).select().single(),
     ).pipe(
-      map(response => {
+      map((response) => {
         if (response.error) {
           throw response.error;
         }
         return response.data as Formulario;
       }),
-      tap(nuevaSolicitud => {
+      tap((nuevaSolicitud) => {
         const actuales = this.solicitudesSubject.getValue();
         this.solicitudesSubject.next([nuevaSolicitud, ...actuales]);
       }),
-      catchError(error => {
+      catchError((error) => {
         console.error('Error al insertar solicitud:', error);
         return throwError(() => error);
-      })
+      }),
     );
   }
 }
